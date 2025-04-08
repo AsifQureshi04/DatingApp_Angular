@@ -28,6 +28,16 @@ export class PresenceService {
         this.toastr.info(username + ' has connected');
       });
 
+      this.hubConnection.on('LikeUser',(likeResponse,username) =>{
+        console.log(likeResponse)
+        // const userString = localStorage.getItem('user');
+        // const user = JSON.parse(userString!);
+        // var username = user.data.userName
+        if(likeResponse.value.token === 1) this.toastr.success(username + ' liked you');
+        else this.toastr.info(username +' unliked you');
+
+      });
+
       this.hubConnection.on('UserIsOffline',username =>{
         this.toastr.warning(username + ' has disconnected');
       });
